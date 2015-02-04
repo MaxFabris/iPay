@@ -33,7 +33,7 @@ function AuthCtrl () {
             res.json({token: token});
         });
 
-    }
+    };
 
     me.register = function (req, res) {
         var username = req.body.username,
