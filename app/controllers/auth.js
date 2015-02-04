@@ -1,10 +1,10 @@
-var logger = require('../utils/logger');
+var logger = require('../utils/logger'),
     UserModel = require('../models/user'),
     jwt = require('jwt-simple'),
     config = require('../config/env'),
     _ = require('lodash');
 
-function AuthCtrl () {
+function AuthCtrl() {
     var me = this;
 
     me.login = function (req, res) {

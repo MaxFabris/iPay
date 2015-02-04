@@ -1,8 +1,8 @@
-var logger = require('../utils/logger');
+var logger = require('../utils/logger'),
     _ = require('lodash'),
-    ExpenseModel = require('../models/expense')
+    ExpenseModel = require('../models/expense');
 
-function ExpensesCtrl () {
+function ExpensesCtrl() {
     var me = this;
 
     me.list = function (req, res) {
@@ -15,12 +15,12 @@ function ExpensesCtrl () {
             };
 
         if (!_.isEmpty(tag)) query.tags = tag;
-        if (!_.isEmpty(from)) query.date = { '$gt': from};
+        if (!_.isEmpty(from)) query.date = {'$gt': from};
         if (!_.isEmpty(to)) {
             if (!query.date) {
                 query.date = {};
             }
-            query.date = { '$lt': to};
+            query.date = {'$lt': to};
         }
 
         ExpenseModel.find(query, function (err, expenses) {
@@ -30,7 +30,7 @@ function ExpensesCtrl () {
                 return res.status(500).send(err.toStrting());
             }
 
-            expenses.forEach(function(expense, index) {
+            expenses.forEach(function (expense, index) {
                 expenses[index] = expense.formatResponse();
             })
 
@@ -42,18 +42,17 @@ function ExpensesCtrl () {
         var expense = req.body;
 
         if (_.isEmpty(expense) ||
-            _.isEmpty(expense.name) ||
-            !(_.isNumber(expense.amount) && expense.amount >= 0)) {
+            _.isEmpty(expense.name) || !(_.isNumber(expense.amount) && expense.amount >= 0)) {
             return res.status(400).send('Missing name or amount of the expense');
         }
 
         expense.userId = req.user.id;
         expense.date = new Date();
         ExpenseModel.create(expense, function (err, expense) {
-           if (err) {
-               logger.trace(err);
-               return res.status(500).send(err.toString());
-           }
+            if (err) {
+                logger.trace(err);
+                return res.status(500).send(err.toString());
+            }
 
             res.status(201).json(expense.formatResponse());
         });
