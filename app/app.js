@@ -16,4 +16,4 @@ app.use(errorMiddleware());
 app.use('/auth', user);
 app.use('/api', jwtMiddleware({secret: config.auth.secret}), api);
 module.exports = app;
-    
+
