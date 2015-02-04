@@ -1,0 +1,27 @@
+# OS Specific
+.DS_Store
+thumbs.db
+
+# Third Party Libs
+node_modules/
+public/js/lib/
+
+# IDE Specific
+.idea
+
+# Temp Files
+logs
+*.log
+*.out
+pids
+*.pid
+*.seed
+
+# Build Artifacts
+coverage/
+*.out
+.grunt
+
+
+
+
