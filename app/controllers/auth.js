@@ -24,7 +24,6 @@ function AuthCtrl() {
             if (!user) return res.status(404).send('User\'s not found');
 
             if (user.password !== password) return res.status(400).send('Invalid password');
-
             var token = jwt.encode({
                 id: user._id.toString(),
                 username: user.username.toString()
