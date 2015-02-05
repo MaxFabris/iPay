@@ -21,6 +21,7 @@ pids
 coverage/
 *.out
 .grunt
+app/config/env.js
 
 
 
